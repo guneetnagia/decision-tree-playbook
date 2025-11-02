@@ -55,9 +55,9 @@ export const ResultCard = ({ result, path, treeData, onReset }: ResultCardProps)
       <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-6">
         <p className="text-sm">
           <strong>🎯 ML Classification Complete!</strong> The decision tree used {path.length - 1} features
-          to classify your travel needs. In production, Amadeus models evaluate 100+ features
-          (demographics, booking history, seasonality, pricing data) to deliver optimal recommendations
-          with 85%+ accuracy at scale!
+          to classify your hospitality needs. In production, hotel systems evaluate 100+ features
+          (demographics, booking history, seasonality, pricing, location preferences) to deliver optimal 
+          recommendations with 85%+ accuracy at scale!
         </p>
       </div>
 

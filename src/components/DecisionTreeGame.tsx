@@ -18,51 +18,304 @@ export interface TreeNodeData {
 const treeData: Record<string, TreeNodeData> = {
   root: {
     id: "root",
-    question: "Is the travel duration more than 6 hours?",
-    yesNode: "longDistance",
-    noNode: "shortDistance",
+    question: "Is this a leisure or business trip?",
+    yesNode: "business",
+    noNode: "leisure",
   },
-  longDistance: {
-    id: "longDistance",
-    question: "Does the customer prioritize comfort over cost?",
-    yesNode: "premium",
-    noNode: "economy",
+  business: {
+    id: "business",
+    question: "Will you need meeting facilities?",
+    yesNode: "businessMeetings",
+    noNode: "businessNoMeetings",
   },
-  premium: {
-    id: "premium",
-    answer: "Business Class Flight ✈️ - Premium experience with lounge access",
+  businessMeetings: {
+    id: "businessMeetings",
+    question: "Is location in city center important?",
+    yesNode: "businessCityCenter",
+    noNode: "businessSuburban",
+  },
+  businessCityCenter: {
+    id: "businessCityCenter",
+    question: "Do you need executive lounge access?",
+    yesNode: "businessCityCenterPremium",
+    noNode: "businessCityCenterStandard",
+  },
+  businessCityCenterPremium: {
+    id: "businessCityCenterPremium",
+    answer: "🏢 Premium Business Hotel - City center with executive lounge, meeting rooms, and concierge service",
     isLeaf: true,
   },
-  economy: {
-    id: "economy",
-    answer: "Economy Class Flight 🎫 - Cost-effective long-haul option",
+  businessCityCenterStandard: {
+    id: "businessCityCenterStandard",
+    answer: "🏨 Business Hotel - City center with meeting facilities and fast WiFi",
     isLeaf: true,
   },
-  shortDistance: {
-    id: "shortDistance",
-    question: "Is flexibility important (cancellations/changes)?",
-    yesNode: "flexible",
-    noNode: "fixed",
+  businessSuburban: {
+    id: "businessSuburban",
+    question: "Is free parking important?",
+    yesNode: "businessSuburbanParking",
+    noNode: "businessSuburbanNoParking",
   },
-  flexible: {
-    id: "flexible",
-    question: "Traveling for business purposes?",
-    yesNode: "businessFlexible",
-    noNode: "leisureFlexible",
-  },
-  businessFlexible: {
-    id: "businessFlexible",
-    answer: "Flexible Business Fare 💼 - Fully refundable with schedule changes",
+  businessSuburbanParking: {
+    id: "businessSuburbanParking",
+    answer: "🚗 Conference Center Hotel - Suburban location with free parking, meeting spaces, and shuttle service",
     isLeaf: true,
   },
-  leisureFlexible: {
-    id: "leisureFlexible",
-    answer: "Flexible Economy Fare 🎒 - Moderate flexibility for leisure travel",
+  businessSuburbanNoParking: {
+    id: "businessSuburbanNoParking",
+    answer: "🏢 Business Park Hotel - Near business districts with meeting facilities and restaurant",
     isLeaf: true,
   },
-  fixed: {
-    id: "fixed",
-    answer: "Budget Fixed Fare 💰 - Best price with fixed schedule",
+  businessNoMeetings: {
+    id: "businessNoMeetings",
+    question: "Is the trip longer than 3 nights?",
+    yesNode: "businessLongStay",
+    noNode: "businessShortStay",
+  },
+  businessLongStay: {
+    id: "businessLongStay",
+    question: "Do you need kitchen facilities?",
+    yesNode: "businessApartment",
+    noNode: "businessExtendedStay",
+  },
+  businessApartment: {
+    id: "businessApartment",
+    answer: "🏠 Serviced Apartment - Full kitchen, workspace, and weekly housekeeping for extended stays",
+    isLeaf: true,
+  },
+  businessExtendedStay: {
+    id: "businessExtendedStay",
+    answer: "🏨 Extended Stay Hotel - Comfortable rooms with workspace and complimentary breakfast",
+    isLeaf: true,
+  },
+  businessShortStay: {
+    id: "businessShortStay",
+    question: "Is budget a primary concern?",
+    yesNode: "businessBudget",
+    noNode: "businessComfort",
+  },
+  businessBudget: {
+    id: "businessBudget",
+    answer: "💼 Economy Business Hotel - Clean, efficient, with basic amenities and good WiFi",
+    isLeaf: true,
+  },
+  businessComfort: {
+    id: "businessComfort",
+    answer: "⭐ Boutique Business Hotel - Stylish rooms with premium amenities and personalized service",
+    isLeaf: true,
+  },
+  leisure: {
+    id: "leisure",
+    question: "Are you traveling with family?",
+    yesNode: "family",
+    noNode: "couple",
+  },
+  family: {
+    id: "family",
+    question: "Do you need kids' activities and entertainment?",
+    yesNode: "familyActivities",
+    noNode: "familyRelax",
+  },
+  familyActivities: {
+    id: "familyActivities",
+    question: "Is beach access important?",
+    yesNode: "familyBeachResort",
+    noNode: "familyCityEntertainment",
+  },
+  familyBeachResort: {
+    id: "familyBeachResort",
+    question: "All-inclusive preferred?",
+    yesNode: "familyBeachAllInclusive",
+    noNode: "familyBeachFlexible",
+  },
+  familyBeachAllInclusive: {
+    id: "familyBeachAllInclusive",
+    answer: "🏖️ All-Inclusive Beach Resort - Kids club, water sports, unlimited dining, and family activities",
+    isLeaf: true,
+  },
+  familyBeachFlexible: {
+    id: "familyBeachFlexible",
+    answer: "🌊 Family Beach Hotel - Beachfront location with pool, kids' amenities, and dining options",
+    isLeaf: true,
+  },
+  familyCityEntertainment: {
+    id: "familyCityEntertainment",
+    question: "Near theme parks or attractions?",
+    yesNode: "familyThemePark",
+    noNode: "familyCitySuite",
+  },
+  familyThemePark: {
+    id: "familyThemePark",
+    answer: "🎢 Theme Park Resort Hotel - Adjacent to attractions with character dining and park shuttles",
+    isLeaf: true,
+  },
+  familyCitySuite: {
+    id: "familyCitySuite",
+    answer: "🏙️ Family Suite Hotel - Spacious suites near city attractions with pool and breakfast",
+    isLeaf: true,
+  },
+  familyRelax: {
+    id: "familyRelax",
+    question: "Looking for outdoor activities?",
+    yesNode: "familyOutdoor",
+    noNode: "familyComfort",
+  },
+  familyOutdoor: {
+    id: "familyOutdoor",
+    question: "Mountain or countryside preferred?",
+    yesNode: "familyMountain",
+    noNode: "familyCountryside",
+  },
+  familyMountain: {
+    id: "familyMountain",
+    answer: "⛰️ Mountain Lodge - Hiking trails, nature activities, family rooms with scenic views",
+    isLeaf: true,
+  },
+  familyCountryside: {
+    id: "familyCountryside",
+    answer: "🌾 Countryside Resort - Farm activities, nature walks, and family cottages",
+    isLeaf: true,
+  },
+  familyComfort: {
+    id: "familyComfort",
+    question: "Multi-bedroom suites needed?",
+    yesNode: "familyVilla",
+    noNode: "familyStandard",
+  },
+  familyVilla: {
+    id: "familyVilla",
+    answer: "🏡 Family Villa Resort - Private villas with kitchens, pools, and childcare services",
+    isLeaf: true,
+  },
+  familyStandard: {
+    id: "familyStandard",
+    answer: "👨‍👩‍👧‍👦 Family-Friendly Hotel - Connecting rooms, kids' menu, and recreational facilities",
+    isLeaf: true,
+  },
+  couple: {
+    id: "couple",
+    question: "Looking for a romantic experience?",
+    yesNode: "romantic",
+    noNode: "adventure",
+  },
+  romantic: {
+    id: "romantic",
+    question: "Do you want spa and wellness facilities?",
+    yesNode: "romanticSpa",
+    noNode: "romanticDining",
+  },
+  romanticSpa: {
+    id: "romanticSpa",
+    question: "Secluded location preferred?",
+    yesNode: "romanticSecluded",
+    noNode: "romanticUrban",
+  },
+  romanticSecluded: {
+    id: "romanticSecluded",
+    answer: "💑 Luxury Spa Resort - Private villas, couples' spa, infinity pool, and gourmet dining",
+    isLeaf: true,
+  },
+  romanticUrban: {
+    id: "romanticUrban",
+    answer: "🌆 Urban Spa Hotel - Rooftop spa, couples' treatments, city views, and fine dining",
+    isLeaf: true,
+  },
+  romanticDining: {
+    id: "romanticDining",
+    question: "Beach or mountain views?",
+    yesNode: "romanticBeach",
+    noNode: "romanticMountain",
+  },
+  romanticBeach: {
+    id: "romanticBeach",
+    answer: "🌅 Beachfront Romantic Resort - Private beach dinners, sunset views, and intimate settings",
+    isLeaf: true,
+  },
+  romanticMountain: {
+    id: "romanticMountain",
+    answer: "🏔️ Mountain Romantic Retreat - Cozy fireplaces, mountain views, wine tasting, and stargazing",
+    isLeaf: true,
+  },
+  adventure: {
+    id: "adventure",
+    question: "What type of adventure interests you?",
+    yesNode: "adventureActive",
+    noNode: "adventureCultural",
+  },
+  adventureActive: {
+    id: "adventureActive",
+    question: "Water sports or land activities?",
+    yesNode: "adventureWater",
+    noNode: "adventureLand",
+  },
+  adventureWater: {
+    id: "adventureWater",
+    question: "Diving or surfing focus?",
+    yesNode: "adventureDiving",
+    noNode: "adventureSurfing",
+  },
+  adventureDiving: {
+    id: "adventureDiving",
+    answer: "🤿 Dive Resort - PADI center, boat trips, dive packages, and beachfront access",
+    isLeaf: true,
+  },
+  adventureSurfing: {
+    id: "adventureSurfing",
+    answer: "🏄 Surf Camp Hotel - Surf lessons, board rentals, beach location, and active community",
+    isLeaf: true,
+  },
+  adventureLand: {
+    id: "adventureLand",
+    question: "Mountain climbing or cycling tours?",
+    yesNode: "adventureClimbing",
+    noNode: "adventureCycling",
+  },
+  adventureClimbing: {
+    id: "adventureClimbing",
+    answer: "🧗 Mountain Adventure Lodge - Climbing guides, gear rental, base camp location, and trail access",
+    isLeaf: true,
+  },
+  adventureCycling: {
+    id: "adventureCycling",
+    answer: "🚴 Cycling Tour Hotel - Bike rentals, guided tours, scenic routes, and bike storage",
+    isLeaf: true,
+  },
+  adventureCultural: {
+    id: "adventureCultural",
+    question: "Historic sites or local experiences?",
+    yesNode: "adventureHistoric",
+    noNode: "adventureLocal",
+  },
+  adventureHistoric: {
+    id: "adventureHistoric",
+    question: "Stay in historic building?",
+    yesNode: "adventureHistoricHotel",
+    noNode: "adventureHistoricModern",
+  },
+  adventureHistoricHotel: {
+    id: "adventureHistoricHotel",
+    answer: "🏰 Historic Heritage Hotel - Restored castle/manor with modern amenities and cultural tours",
+    isLeaf: true,
+  },
+  adventureHistoricModern: {
+    id: "adventureHistoricModern",
+    answer: "🏛️ Boutique Hotel Near Historic Sites - Modern comfort with walking distance to landmarks",
+    isLeaf: true,
+  },
+  adventureLocal: {
+    id: "adventureLocal",
+    question: "Prefer urban or rural experience?",
+    yesNode: "adventureUrban",
+    noNode: "adventureRural",
+  },
+  adventureUrban: {
+    id: "adventureUrban",
+    answer: "🌃 Urban Cultural Hotel - Local neighborhood, street food tours, and authentic experiences",
+    isLeaf: true,
+  },
+  adventureRural: {
+    id: "adventureRural",
+    answer: "🌿 Eco-Lodge Experience - Village homestays, local guides, cultural immersion, and nature",
     isLeaf: true,
   },
 };
@@ -99,10 +352,10 @@ export const DecisionTreeGame = () => {
       <div className="max-w-7xl mx-auto">
         <header className="text-center mb-8 animate-fade-in">
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-3">
-            ML Decision Trees in Travel
+            ML Decision Trees in Hospitality
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Discover how Amadeus uses machine learning decision trees to personalize travel recommendations
+            Discover how the hospitality industry uses machine learning decision trees to personalize guest experiences
           </p>
         </header>
 

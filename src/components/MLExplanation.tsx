@@ -5,7 +5,7 @@ export const MLExplanation = () => {
   return (
     <div className="mt-12 mb-8 animate-fade-in">
       <h2 className="text-2xl font-bold text-center mb-6">
-        How Amadeus Uses Decision Trees in Production
+        How Hospitality Industry Uses Decision Trees in Production
       </h2>
       
       <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
@@ -15,10 +15,11 @@ export const MLExplanation = () => {
               <Brain className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <h3 className="font-semibold text-foreground mb-2">Customer Segmentation</h3>
+              <h3 className="font-semibold text-foreground mb-2">Guest Segmentation</h3>
               <p className="text-sm text-muted-foreground">
-                Decision trees classify millions of travelers into segments based on booking patterns, 
-                preferences, and behavior. This enables personalized offers and dynamic pricing strategies.
+                Decision trees classify millions of guests into segments based on booking patterns, 
+                preferences, and behavior. This enables personalized offers, room recommendations, and 
+                tailored services for each guest type.
               </p>
             </div>
           </div>
@@ -30,10 +31,11 @@ export const MLExplanation = () => {
               <TrendingUp className="w-5 h-5 text-accent" />
             </div>
             <div>
-              <h3 className="font-semibold text-foreground mb-2">Revenue Optimization</h3>
+              <h3 className="font-semibold text-foreground mb-2">Revenue Management</h3>
               <p className="text-sm text-muted-foreground">
-                Trees predict booking probability and customer lifetime value, helping airlines and 
-                hotels optimize inventory allocation and pricing for maximum revenue.
+                Trees predict booking probability and guest lifetime value, helping hotels optimize 
+                room inventory allocation, dynamic pricing strategies, and upselling opportunities 
+                for maximum revenue per available room (RevPAR).
               </p>
             </div>
           </div>
@@ -45,10 +47,11 @@ export const MLExplanation = () => {
               <Users className="w-5 h-5 text-success" />
             </div>
             <div>
-              <h3 className="font-semibold text-foreground mb-2">Churn Prevention</h3>
+              <h3 className="font-semibold text-foreground mb-2">Loyalty & Retention</h3>
               <p className="text-sm text-muted-foreground">
-                Identify at-risk customers by analyzing booking frequency, complaint history, and 
-                engagement. Trees trigger retention campaigns before customers churn to competitors.
+                Identify at-risk guests by analyzing booking frequency, satisfaction scores, and 
+                engagement patterns. Trees trigger personalized retention campaigns and loyalty rewards 
+                before guests churn to competitors.
               </p>
             </div>
           </div>
@@ -62,8 +65,9 @@ export const MLExplanation = () => {
             <div>
               <h3 className="font-semibold text-foreground mb-2">Real-Time Recommendations</h3>
               <p className="text-sm text-muted-foreground">
-                Fast inference enables instant product suggestions during booking flows. Trees evaluate 
-                hundreds of features in milliseconds to show the most relevant travel options.
+                Fast inference enables instant property and service suggestions during booking flows. 
+                Trees evaluate hundreds of features in milliseconds to show the most relevant hotel 
+                options, room types, and add-on services.
               </p>
             </div>
           </div>
@@ -77,21 +81,23 @@ export const MLExplanation = () => {
         </h3>
         <div className="grid md:grid-cols-2 gap-4 text-sm text-muted-foreground">
           <div>
-            <strong className="text-foreground">Training:</strong>
+            <strong className="text-foreground">Training Phase:</strong>
             <ul className="mt-1 space-y-1 ml-4">
-              <li>• Historical booking data (millions of records)</li>
-              <li>• Feature engineering: trip duration, seasonality, user demographics</li>
-              <li>• Algorithm: CART, Random Forest, or Gradient Boosting</li>
-              <li>• Cross-validation to prevent overfitting</li>
+              <li>• Historical booking data (millions of reservations)</li>
+              <li>• Feature engineering: stay duration, seasonality, guest demographics, booking channel</li>
+              <li>• Algorithms: CART, Random Forest, or Gradient Boosting Trees</li>
+              <li>• Cross-validation and hyperparameter tuning to prevent overfitting</li>
+              <li>• A/B testing on holdout sets before production deployment</li>
             </ul>
           </div>
           <div>
             <strong className="text-foreground">Production Deployment:</strong>
             <ul className="mt-1 space-y-1 ml-4">
-              <li>• Model versioning and A/B testing</li>
-              <li>• Low-latency prediction APIs (&lt;50ms)</li>
-              <li>• Continuous monitoring and retraining</li>
-              <li>• Integration with booking engines and CRM</li>
+              <li>• Model versioning with rollback capabilities</li>
+              <li>• Ultra-low latency prediction APIs (&lt;50ms response time)</li>
+              <li>• Continuous monitoring of model performance metrics</li>
+              <li>• Automated retraining pipelines with fresh data</li>
+              <li>• Integration with CRM, booking engines, and marketing platforms</li>
             </ul>
           </div>
         </div>
@@ -99,26 +105,55 @@ export const MLExplanation = () => {
 
       <div className="mt-8 p-6 bg-accent/5 border border-accent/20 rounded-lg max-w-4xl mx-auto">
         <h3 className="font-semibold text-foreground mb-3">
-          Why Decision Trees Excel in Travel Tech
+          Why Decision Trees Excel in Hospitality Technology
         </h3>
         <div className="grid md:grid-cols-3 gap-4 text-sm">
           <div className="p-3 bg-card rounded-lg">
             <strong className="text-accent">Interpretability</strong>
             <p className="text-muted-foreground mt-1">
-              Explain recommendations to users: "We suggest this because you prefer flexible bookings"
+              Explain recommendations to guests and staff: "We suggest this room because you prefer 
+              ocean views and extended stays"
             </p>
           </div>
           <div className="p-3 bg-card rounded-lg">
             <strong className="text-accent">Handle Mixed Data</strong>
             <p className="text-muted-foreground mt-1">
-              Process numeric (price), categorical (destination), and temporal (date) features seamlessly
+              Process numeric (price, nights), categorical (room type, destination), 
+              and temporal (season, day of week) features seamlessly
             </p>
           </div>
           <div className="p-3 bg-card rounded-lg">
             <strong className="text-accent">Non-Linear Patterns</strong>
             <p className="text-muted-foreground mt-1">
-              Capture complex interactions: "Business travelers in Q4 prefer morning flights"
+              Capture complex interactions: "Business travelers in Q4 prefer downtown hotels 
+              with meeting facilities and early check-in"
             </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-8 p-6 bg-secondary/50 rounded-lg max-w-4xl mx-auto">
+        <h3 className="font-semibold text-foreground mb-3">
+          Real-World Hospitality Applications
+        </h3>
+        <div className="grid md:grid-cols-2 gap-4 text-sm text-muted-foreground">
+          <div>
+            <strong className="text-foreground">Hotels & Resorts:</strong>
+            <ul className="mt-1 space-y-1 ml-4">
+              <li>• Room type recommendations based on guest profiles</li>
+              <li>• Dynamic pricing optimization by demand forecasting</li>
+              <li>• Amenity usage prediction for resource allocation</li>
+              <li>• No-show prediction for overbooking strategies</li>
+            </ul>
+          </div>
+          <div>
+            <strong className="text-foreground">Booking Platforms:</strong>
+            <ul className="mt-1 space-y-1 ml-4">
+              <li>• Property ranking and personalized search results</li>
+              <li>• Cross-selling and upselling recommendations</li>
+              <li>• Fraud detection for suspicious bookings</li>
+              <li>• Review score prediction and sentiment analysis</li>
+            </ul>
           </div>
         </div>
       </div>
