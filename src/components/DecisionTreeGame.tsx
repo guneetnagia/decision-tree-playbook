@@ -4,7 +4,8 @@ import { QuestionCard } from "./QuestionCard";
 import { ResultCard } from "./ResultCard";
 import { MLExplanation } from "./MLExplanation";
 import { Button } from "./ui/button";
-import { RotateCcw } from "lucide-react";
+import { RotateCcw, ZoomIn, ZoomOut, Maximize2, X } from "lucide-react";
+import { Dialog, DialogContent } from "./ui/dialog";
 
 export interface TreeNodeData {
   id: string;
@@ -324,6 +325,8 @@ export const DecisionTreeGame = () => {
   const [currentNodeId, setCurrentNodeId] = useState<string>("root");
   const [path, setPath] = useState<string[]>(["root"]);
   const [isComplete, setIsComplete] = useState(false);
+  const [zoom, setZoom] = useState(100);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const currentNode = treeData[currentNodeId];
 
@@ -347,6 +350,125 @@ export const DecisionTreeGame = () => {
     setIsComplete(false);
   };
 
+  const handleZoomIn = () => {
+    setZoom(prev => Math.min(prev + 20, 200));
+  };
+
+  const handleZoomOut = () => {
+    setZoom(prev => Math.max(prev - 20, 60));
+  };
+
+  const handleZoomReset = () => {
+    setZoom(100);
+  };
+
+  const renderTreeVisualization = (isModal = false) => (
+    <div className={`bg-card rounded-xl shadow-lg p-4 sm:p-6 animate-fade-in ${!isModal && "order-2 lg:order-1"}`}>
+      <div className="flex items-center justify-between mb-4 sm:mb-6 flex-wrap gap-3">
+        <h2 className="text-lg sm:text-xl lg:text-2xl font-bold flex items-center gap-3">
+          <span className="w-3 h-3 bg-accent rounded-full animate-pulse-glow" />
+          <span>Decision Tree Structure</span>
+        </h2>
+        
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 bg-secondary/50 rounded-lg p-1">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleZoomOut}
+              disabled={zoom <= 60}
+              className="h-8 w-8 p-0"
+            >
+              <ZoomOut className="w-4 h-4" />
+            </Button>
+            <span className="text-xs font-medium px-2 min-w-[3rem] text-center">
+              {zoom}%
+            </span>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleZoomIn}
+              disabled={zoom >= 200}
+              className="h-8 w-8 p-0"
+            >
+              <ZoomIn className="w-4 h-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleZoomReset}
+              className="h-8 px-2 text-xs"
+            >
+              Reset
+            </Button>
+          </div>
+          
+          {!isModal && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsFullscreen(true)}
+              className="h-8 px-3 gap-1.5"
+            >
+              <Maximize2 className="w-4 h-4" />
+              <span className="hidden sm:inline">Fullscreen</span>
+            </Button>
+          )}
+        </div>
+      </div>
+      
+      <div className="bg-secondary/30 rounded-lg p-4 mb-4">
+        <p className="text-xs sm:text-sm text-muted-foreground">
+          <strong className="text-foreground">💡 Interactive Guide:</strong> Follow the highlighted path as you answer questions. 
+          The tree shows how each decision leads to the next question or final recommendation.
+        </p>
+      </div>
+
+      <div className="overflow-auto pb-6 -mx-2 sm:mx-0 bg-gradient-to-b from-secondary/10 to-transparent rounded-lg p-4 max-h-[600px]">
+        <div 
+          className="min-w-max px-2 sm:px-4 transition-transform duration-200 origin-top-left"
+          style={{ transform: `scale(${zoom / 100})` }}
+        >
+          <TreeNode
+            node={treeData.root}
+            treeData={treeData}
+            activePath={path}
+            currentNodeId={currentNodeId}
+          />
+        </div>
+      </div>
+      
+      <div className="mt-6 p-4 sm:p-5 bg-primary/5 border-l-4 border-primary rounded-lg">
+        <h3 className="font-bold mb-3 text-foreground text-sm sm:text-base flex items-center gap-2">
+          <span className="text-xl">🎓</span>
+          ML Decision Tree Fundamentals
+        </h3>
+        <ul className="text-xs sm:text-sm text-muted-foreground space-y-2 sm:space-y-2.5 leading-relaxed">
+          <li className="flex gap-2">
+            <span className="text-primary font-bold">→</span>
+            <span><strong className="text-foreground">Supervised Learning:</strong> Trained on historical booking data</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-primary font-bold">→</span>
+            <span><strong className="text-foreground">Binary Splits:</strong> Each node creates yes/no decision boundaries</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-primary font-bold">→</span>
+            <span><strong className="text-foreground">Feature Selection:</strong> Algorithm chooses most informative questions</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-primary font-bold">→</span>
+            <span><strong className="text-foreground">Classification:</strong> Assigns travelers to product categories</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-primary font-bold">→</span>
+            <span><strong className="text-foreground">Interpretability:</strong> Clear reasoning path for recommendations</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-background p-3 sm:p-4 md:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
@@ -361,59 +483,7 @@ export const DecisionTreeGame = () => {
 
         <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-start">
           {/* Tree Visualization */}
-          <div className="bg-card rounded-xl shadow-lg p-4 sm:p-6 animate-fade-in order-2 lg:order-1">
-            <h2 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-3">
-              <span className="w-3 h-3 bg-accent rounded-full animate-pulse-glow" />
-              <span>Decision Tree Structure</span>
-            </h2>
-            
-            <div className="bg-secondary/30 rounded-lg p-4 mb-4">
-              <p className="text-xs sm:text-sm text-muted-foreground">
-                <strong className="text-foreground">💡 Interactive Guide:</strong> Follow the highlighted path as you answer questions. 
-                The tree shows how each decision leads to the next question or final recommendation.
-              </p>
-            </div>
-
-            <div className="overflow-x-auto pb-6 -mx-2 sm:mx-0 bg-gradient-to-b from-secondary/10 to-transparent rounded-lg p-4">
-              <div className="min-w-max px-2 sm:px-4">
-                <TreeNode
-                  node={treeData.root}
-                  treeData={treeData}
-                  activePath={path}
-                  currentNodeId={currentNodeId}
-                />
-              </div>
-            </div>
-            
-            <div className="mt-6 p-4 sm:p-5 bg-primary/5 border-l-4 border-primary rounded-lg">
-              <h3 className="font-bold mb-3 text-foreground text-sm sm:text-base flex items-center gap-2">
-                <span className="text-xl">🎓</span>
-                ML Decision Tree Fundamentals
-              </h3>
-              <ul className="text-xs sm:text-sm text-muted-foreground space-y-2 sm:space-y-2.5 leading-relaxed">
-                <li className="flex gap-2">
-                  <span className="text-primary font-bold">→</span>
-                  <span><strong className="text-foreground">Supervised Learning:</strong> Trained on historical booking data</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-primary font-bold">→</span>
-                  <span><strong className="text-foreground">Binary Splits:</strong> Each node creates yes/no decision boundaries</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-primary font-bold">→</span>
-                  <span><strong className="text-foreground">Feature Selection:</strong> Algorithm chooses most informative questions</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-primary font-bold">→</span>
-                  <span><strong className="text-foreground">Classification:</strong> Assigns travelers to product categories</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-primary font-bold">→</span>
-                  <span><strong className="text-foreground">Interpretability:</strong> Clear reasoning path for recommendations</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+          {renderTreeVisualization()}
 
           {/* Game Interface */}
           <div className="animate-slide-in order-1 lg:order-2">
@@ -448,6 +518,25 @@ export const DecisionTreeGame = () => {
 
         <MLExplanation />
       </div>
+
+      {/* Fullscreen Modal */}
+      <Dialog open={isFullscreen} onOpenChange={setIsFullscreen}>
+        <DialogContent className="max-w-[95vw] max-h-[95vh] h-[95vh] p-0">
+          <div className="relative h-full overflow-hidden">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsFullscreen(false)}
+              className="absolute top-4 right-4 z-10 bg-background/80 backdrop-blur-sm hover:bg-background"
+            >
+              <X className="w-5 h-5" />
+            </Button>
+            <div className="h-full overflow-auto p-6">
+              {renderTreeVisualization(true)}
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
