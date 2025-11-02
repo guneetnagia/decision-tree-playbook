@@ -348,35 +348,37 @@ export const DecisionTreeGame = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8">
+    <div className="min-h-screen bg-background p-3 sm:p-4 md:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
-        <header className="text-center mb-8 animate-fade-in">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-3">
+        <header className="text-center mb-6 sm:mb-8 animate-fade-in">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2 sm:mb-3 px-2">
             ML Decision Trees in Hospitality
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">
             Discover how the hospitality industry uses machine learning decision trees to personalize guest experiences
           </p>
         </header>
 
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-start">
           {/* Tree Visualization */}
-          <div className="bg-card rounded-xl shadow-lg p-6 animate-fade-in">
-            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+          <div className="bg-card rounded-xl shadow-lg p-4 sm:p-6 animate-fade-in order-2 lg:order-1">
+            <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 flex items-center gap-2 flex-wrap">
               <span className="w-2 h-2 bg-accent rounded-full animate-pulse-glow" />
-              Decision Tree Structure
+              <span className="text-sm sm:text-base md:text-xl">Decision Tree Structure</span>
             </h2>
-            <div className="overflow-x-auto pb-4">
-              <TreeNode
-                node={treeData.root}
-                treeData={treeData}
-                activePath={path}
-                currentNodeId={currentNodeId}
-              />
+            <div className="overflow-x-auto pb-4 -mx-2 sm:mx-0">
+              <div className="min-w-max px-2 sm:px-0">
+                <TreeNode
+                  node={treeData.root}
+                  treeData={treeData}
+                  activePath={path}
+                  currentNodeId={currentNodeId}
+                />
+              </div>
             </div>
-            <div className="mt-6 p-4 bg-secondary/50 rounded-lg">
-              <h3 className="font-semibold mb-2 text-foreground">ML Decision Tree Fundamentals:</h3>
-              <ul className="text-sm text-muted-foreground space-y-1.5">
+            <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-secondary/50 rounded-lg">
+              <h3 className="font-semibold mb-2 text-foreground text-sm sm:text-base">ML Decision Tree Fundamentals:</h3>
+              <ul className="text-xs sm:text-sm text-muted-foreground space-y-1 sm:space-y-1.5">
                 <li>• <strong>Supervised Learning:</strong> Trained on historical booking data</li>
                 <li>• <strong>Binary Splits:</strong> Each node creates yes/no decision boundaries</li>
                 <li>• <strong>Feature Selection:</strong> Algorithm chooses most informative questions</li>
@@ -387,7 +389,7 @@ export const DecisionTreeGame = () => {
           </div>
 
           {/* Game Interface */}
-          <div className="animate-slide-in">
+          <div className="animate-slide-in order-1 lg:order-2">
             {!isComplete ? (
               <QuestionCard
                 question={currentNode.question || ""}
@@ -405,12 +407,12 @@ export const DecisionTreeGame = () => {
           </div>
         </div>
 
-        <div className="mt-8 text-center">
+        <div className="mt-6 sm:mt-8 text-center">
           <Button
             onClick={handleReset}
             variant="outline"
             size="lg"
-            className="gap-2"
+            className="gap-2 w-full sm:w-auto"
           >
             <RotateCcw className="w-4 h-4" />
             Start Over

@@ -11,39 +11,39 @@ interface ResultCardProps {
 
 export const ResultCard = ({ result, path, treeData, onReset }: ResultCardProps) => {
   return (
-    <div className="bg-gradient-primary rounded-xl shadow-lg p-8 text-white">
-      <div className="text-center mb-6">
-        <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full mb-4">
-          <Sparkles className="w-4 h-4" />
-          <span className="text-sm font-medium">Prediction Complete!</span>
+    <div className="bg-gradient-primary rounded-xl shadow-lg p-4 sm:p-6 md:p-8 text-white">
+      <div className="text-center mb-4 sm:mb-6">
+        <div className="inline-flex items-center gap-2 bg-white/20 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4">
+          <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
+          <span className="text-xs sm:text-sm font-medium">Prediction Complete!</span>
         </div>
         
-        <h2 className="text-4xl font-bold mb-2">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
           Recommended Option:
         </h2>
-        <div className="text-6xl mb-4 animate-fade-in">
+        <div className="text-3xl sm:text-4xl md:text-6xl mb-3 sm:mb-4 animate-fade-in break-words px-2">
           {result}
         </div>
       </div>
 
-      <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-6">
-        <h3 className="font-semibold mb-3 flex items-center gap-2">
-          <TrendingDown className="w-4 h-4" />
+      <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 mb-4 sm:mb-6">
+        <h3 className="font-semibold mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+          <TrendingDown className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
           Decision Path:
         </h3>
-        <div className="space-y-2">
+        <div className="space-y-2 max-h-[200px] sm:max-h-[300px] overflow-y-auto">
           {path.map((nodeId, index) => {
             const node = treeData[nodeId];
             return (
               <div
                 key={nodeId}
-                className="flex items-start gap-3 text-sm animate-slide-in"
+                className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm animate-slide-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <span className="bg-white/20 rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 font-medium">
+                <span className="bg-white/20 rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center flex-shrink-0 font-medium text-xs">
                   {index + 1}
                 </span>
-                <span className="pt-0.5">
+                <span className="pt-0.5 break-words">
                   {node.question || node.answer}
                 </span>
               </div>
@@ -52,8 +52,8 @@ export const ResultCard = ({ result, path, treeData, onReset }: ResultCardProps)
         </div>
       </div>
 
-      <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-6">
-        <p className="text-sm">
+      <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+        <p className="text-xs sm:text-sm">
           <strong>🎯 ML Classification Complete!</strong> The decision tree used {path.length - 1} features
           to classify your hospitality needs. In production, hotel systems evaluate 100+ features
           (demographics, booking history, seasonality, pricing, location preferences) to deliver optimal 
@@ -64,7 +64,7 @@ export const ResultCard = ({ result, path, treeData, onReset }: ResultCardProps)
       <Button
         onClick={onReset}
         size="lg"
-        className="w-full bg-white text-primary hover:bg-white/90 gap-2"
+        className="w-full bg-white text-primary hover:bg-white/90 gap-2 py-4 sm:py-6"
       >
         <RotateCcw className="w-4 h-4" />
         Try Again
