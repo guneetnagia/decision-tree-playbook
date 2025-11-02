@@ -362,12 +362,20 @@ export const DecisionTreeGame = () => {
         <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-start">
           {/* Tree Visualization */}
           <div className="bg-card rounded-xl shadow-lg p-4 sm:p-6 animate-fade-in order-2 lg:order-1">
-            <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 flex items-center gap-2 flex-wrap">
-              <span className="w-2 h-2 bg-accent rounded-full animate-pulse-glow" />
-              <span className="text-sm sm:text-base md:text-xl">Decision Tree Structure</span>
+            <h2 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-3">
+              <span className="w-3 h-3 bg-accent rounded-full animate-pulse-glow" />
+              <span>Decision Tree Structure</span>
             </h2>
-            <div className="overflow-x-auto pb-4 -mx-2 sm:mx-0">
-              <div className="min-w-max px-2 sm:px-0">
+            
+            <div className="bg-secondary/30 rounded-lg p-4 mb-4">
+              <p className="text-xs sm:text-sm text-muted-foreground">
+                <strong className="text-foreground">💡 Interactive Guide:</strong> Follow the highlighted path as you answer questions. 
+                The tree shows how each decision leads to the next question or final recommendation.
+              </p>
+            </div>
+
+            <div className="overflow-x-auto pb-6 -mx-2 sm:mx-0 bg-gradient-to-b from-secondary/10 to-transparent rounded-lg p-4">
+              <div className="min-w-max px-2 sm:px-4">
                 <TreeNode
                   node={treeData.root}
                   treeData={treeData}
@@ -376,14 +384,33 @@ export const DecisionTreeGame = () => {
                 />
               </div>
             </div>
-            <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-secondary/50 rounded-lg">
-              <h3 className="font-semibold mb-2 text-foreground text-sm sm:text-base">ML Decision Tree Fundamentals:</h3>
-              <ul className="text-xs sm:text-sm text-muted-foreground space-y-1 sm:space-y-1.5">
-                <li>• <strong>Supervised Learning:</strong> Trained on historical booking data</li>
-                <li>• <strong>Binary Splits:</strong> Each node creates yes/no decision boundaries</li>
-                <li>• <strong>Feature Selection:</strong> Algorithm chooses most informative questions</li>
-                <li>• <strong>Classification:</strong> Assigns travelers to product categories</li>
-                <li>• <strong>Interpretability:</strong> Clear reasoning path for recommendations</li>
+            
+            <div className="mt-6 p-4 sm:p-5 bg-primary/5 border-l-4 border-primary rounded-lg">
+              <h3 className="font-bold mb-3 text-foreground text-sm sm:text-base flex items-center gap-2">
+                <span className="text-xl">🎓</span>
+                ML Decision Tree Fundamentals
+              </h3>
+              <ul className="text-xs sm:text-sm text-muted-foreground space-y-2 sm:space-y-2.5 leading-relaxed">
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">→</span>
+                  <span><strong className="text-foreground">Supervised Learning:</strong> Trained on historical booking data</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">→</span>
+                  <span><strong className="text-foreground">Binary Splits:</strong> Each node creates yes/no decision boundaries</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">→</span>
+                  <span><strong className="text-foreground">Feature Selection:</strong> Algorithm chooses most informative questions</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">→</span>
+                  <span><strong className="text-foreground">Classification:</strong> Assigns travelers to product categories</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">→</span>
+                  <span><strong className="text-foreground">Interpretability:</strong> Clear reasoning path for recommendations</span>
+                </li>
               </ul>
             </div>
           </div>
