@@ -19,7 +19,7 @@ export const ResultCard = ({ result, path, treeData, onReset }: ResultCardProps)
         </div>
         
         <h2 className="text-4xl font-bold mb-2">
-          The animal is:
+          Recommended Option:
         </h2>
         <div className="text-6xl mb-4 animate-fade-in">
           {result}
@@ -54,9 +54,10 @@ export const ResultCard = ({ result, path, treeData, onReset }: ResultCardProps)
 
       <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-6">
         <p className="text-sm">
-          <strong>How did this work?</strong> The decision tree asked {path.length - 1} questions
-          to classify the animal. Each question split the possibilities until reaching
-          a final prediction. This is how machine learning models make decisions!
+          <strong>🎯 ML Classification Complete!</strong> The decision tree used {path.length - 1} features
+          to classify your travel needs. In production, Amadeus models evaluate 100+ features
+          (demographics, booking history, seasonality, pricing data) to deliver optimal recommendations
+          with 85%+ accuracy at scale!
         </p>
       </div>
 

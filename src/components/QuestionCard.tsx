@@ -43,7 +43,8 @@ export const QuestionCard = ({ question, onAnswer, stepNumber }: QuestionCardPro
 
       <div className="mt-6 p-4 bg-secondary/50 rounded-lg">
         <p className="text-sm text-muted-foreground">
-          💡 <strong>Tip:</strong> Watch the tree on the left to see how your answer affects the decision path!
+          💡 <strong>ML in Action:</strong> In production, this would use customer data (booking history, 
+          preferences) to automatically classify travelers. Each split maximizes information gain!
         </p>
       </div>
     </div>

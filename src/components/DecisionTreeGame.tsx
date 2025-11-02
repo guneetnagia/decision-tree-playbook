@@ -2,6 +2,7 @@ import { useState } from "react";
 import { TreeNode } from "./TreeNode";
 import { QuestionCard } from "./QuestionCard";
 import { ResultCard } from "./ResultCard";
+import { MLExplanation } from "./MLExplanation";
 import { Button } from "./ui/button";
 import { RotateCcw } from "lucide-react";
 
@@ -17,51 +18,51 @@ export interface TreeNodeData {
 const treeData: Record<string, TreeNodeData> = {
   root: {
     id: "root",
-    question: "Does it live in water?",
-    yesNode: "water",
-    noNode: "land",
+    question: "Is the travel duration more than 6 hours?",
+    yesNode: "longDistance",
+    noNode: "shortDistance",
   },
-  water: {
-    id: "water",
-    question: "Does it have fins?",
-    yesNode: "fish",
-    noNode: "dolphin",
+  longDistance: {
+    id: "longDistance",
+    question: "Does the customer prioritize comfort over cost?",
+    yesNode: "premium",
+    noNode: "economy",
   },
-  fish: {
-    id: "fish",
-    answer: "Fish 🐟",
+  premium: {
+    id: "premium",
+    answer: "Business Class Flight ✈️ - Premium experience with lounge access",
     isLeaf: true,
   },
-  dolphin: {
-    id: "dolphin",
-    answer: "Dolphin 🐬",
+  economy: {
+    id: "economy",
+    answer: "Economy Class Flight 🎫 - Cost-effective long-haul option",
     isLeaf: true,
   },
-  land: {
-    id: "land",
-    question: "Does it have four legs?",
-    yesNode: "fourLegs",
-    noNode: "bird",
+  shortDistance: {
+    id: "shortDistance",
+    question: "Is flexibility important (cancellations/changes)?",
+    yesNode: "flexible",
+    noNode: "fixed",
   },
-  fourLegs: {
-    id: "fourLegs",
-    question: "Does it purr?",
-    yesNode: "cat",
-    noNode: "dog",
+  flexible: {
+    id: "flexible",
+    question: "Traveling for business purposes?",
+    yesNode: "businessFlexible",
+    noNode: "leisureFlexible",
   },
-  cat: {
-    id: "cat",
-    answer: "Cat 🐱",
+  businessFlexible: {
+    id: "businessFlexible",
+    answer: "Flexible Business Fare 💼 - Fully refundable with schedule changes",
     isLeaf: true,
   },
-  dog: {
-    id: "dog",
-    answer: "Dog 🐕",
+  leisureFlexible: {
+    id: "leisureFlexible",
+    answer: "Flexible Economy Fare 🎒 - Moderate flexibility for leisure travel",
     isLeaf: true,
   },
-  bird: {
-    id: "bird",
-    answer: "Bird 🐦",
+  fixed: {
+    id: "fixed",
+    answer: "Budget Fixed Fare 💰 - Best price with fixed schedule",
     isLeaf: true,
   },
 };
@@ -98,10 +99,10 @@ export const DecisionTreeGame = () => {
       <div className="max-w-7xl mx-auto">
         <header className="text-center mb-8 animate-fade-in">
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-3">
-            Decision Tree Explorer
+            ML Decision Trees in Travel
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Learn how decision trees work by playing this interactive guessing game!
+            Discover how Amadeus uses machine learning decision trees to personalize travel recommendations
           </p>
         </header>
 
@@ -121,12 +122,13 @@ export const DecisionTreeGame = () => {
               />
             </div>
             <div className="mt-6 p-4 bg-secondary/50 rounded-lg">
-              <h3 className="font-semibold mb-2">How it works:</h3>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Each node asks a yes/no question</li>
-                <li>• Your answer determines the next node</li>
-                <li>• The path continues until reaching a leaf (prediction)</li>
-                <li>• The tree learns patterns from training data</li>
+              <h3 className="font-semibold mb-2 text-foreground">ML Decision Tree Fundamentals:</h3>
+              <ul className="text-sm text-muted-foreground space-y-1.5">
+                <li>• <strong>Supervised Learning:</strong> Trained on historical booking data</li>
+                <li>• <strong>Binary Splits:</strong> Each node creates yes/no decision boundaries</li>
+                <li>• <strong>Feature Selection:</strong> Algorithm chooses most informative questions</li>
+                <li>• <strong>Classification:</strong> Assigns travelers to product categories</li>
+                <li>• <strong>Interpretability:</strong> Clear reasoning path for recommendations</li>
               </ul>
             </div>
           </div>
@@ -161,6 +163,8 @@ export const DecisionTreeGame = () => {
             Start Over
           </Button>
         </div>
+
+        <MLExplanation />
       </div>
     </div>
   );
